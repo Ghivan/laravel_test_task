@@ -1,18 +1,13 @@
 <?php
 
-use Illuminate\Http\Request;
+Route::get('albums', 'AlbumController@index');
+Route::get('albums/{id}', 'AlbumController@getById');
+Route::post('albums', 'AlbumController@store');
+Route::put('albums/{id}','AlbumController@update');
+Route::delete('albums/{id}', 'AlbumController@delete');
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('tracks', 'TrackController@index');
+Route::get('tracks/{id}', 'TrackController@getById');
+Route::post('tracks', 'TrackController@store');
+Route::put('tracks/{id}','TrackController@update');
+Route::delete('tracks/{id}', 'TrackController@delete');
