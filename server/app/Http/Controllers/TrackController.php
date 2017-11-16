@@ -25,19 +25,25 @@ class TrackController extends Controller
             !$request['duration'] ||
             !$request['album_id']
         ) {
-            return response('Some parameters are missing!', 400);
+            return response()
+                ->json([
+                    'message' => 'Some parameters are missing!'
+                ], 400);
         }
 
         $trackExists = Track::where([
                 'name' => $request['name'],
                 'musician' => $request['musician'],
                 'duration' => $request['duration'],
-                'year' => $request['album_id']
+                'album_id' => $request['album_id']
             ]
         )->get()->isNotEmpty();
 
         if ($trackExists) {
-            return response('Such track already exists!', 400);
+            return response()
+                ->json([
+                    'message' => 'Such track already exists!'
+                ], 400);
         }
 
         return Track::create([

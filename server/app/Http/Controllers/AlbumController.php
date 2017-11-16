@@ -21,7 +21,10 @@ class AlbumController extends Controller
     public function store(Request $request)
     {
         if (!$request['name'] || !$request['year']) {
-            return response('Some parameters are missing!', 400);
+            return response()
+                ->json([
+                'message' => 'Some parameters are missing!'
+            ], 400);
         }
 
         $albumExists = Album::where([
@@ -31,7 +34,10 @@ class AlbumController extends Controller
         )->get()->isNotEmpty();
 
         if ($albumExists) {
-            return response('Such album already exists!', 400);
+            return response()
+                ->json([
+                    'message' => 'Such album already exists!'
+                ], 400);
         }
 
         return Album::create([
