@@ -1,4 +1,5 @@
 import React from 'react';
+import groupBy from 'lodash/groupBy';
 
 import {connect, Provider} from 'react-redux';
 import store from '../../../AppStore';
@@ -11,7 +12,7 @@ import AlbumsTable from '../Components/AlbumsTable';
 const mapStateToProps = state => {
     return {
         albums: state.albums.list,
-        tracks: state.tracks.groupedByAlbums
+        tracks: groupBy(Object.values(state.tracks.list), (track => track.album_id))
     }
 };
 

@@ -1,18 +1,15 @@
-import _ from 'lodash';
+import keyBy from 'lodash/keyBy';
 import ActionTypes from './TracksActionTypes';
 
 const initialState = {
-    list: {},
-    groupedByAlbums: []
+    list: {}
 };
 
 const reducerFetchTracks = (state, action) => {
-    const groupedTracks = _.groupBy(action.payload.tracks, tracks => tracks.album_id);
-    const normalizedTracks = _.keyBy(action.payload.tracks, tracks => tracks.id);
+    const normalizedTracks = keyBy(action.payload.tracks, tracks => tracks.id);
     return {
         ...state,
-        list: normalizedTracks,
-        groupedByAlbums: groupedTracks
+        list: normalizedTracks
     };
 };
 

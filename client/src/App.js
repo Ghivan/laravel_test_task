@@ -7,7 +7,7 @@ import {
 
 import Menu from './features/Menu/Menu';
 import AlbumsTable from './features/Albums/ReduxContainers/AlbumsConnectedTable';
-import AlbumScreen from './features/Albums/ReduxContainers/AlbumsConnectedScreen';
+import AlbumScreen from './features/Albums/ReduxContainers/AlbumConnectedScreen';
 import TracksTable from './features/Tracks/ReduxContainers/TracksConnectedTable';
 
 class App extends Component {

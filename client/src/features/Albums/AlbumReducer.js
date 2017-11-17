@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import keyBy from 'lodash/keyBy';
 import ActionTypes from './AlbumsActionsTypes';
 
 const initialState = {
@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const reducerFetchAlbums = (state, action) => {
-    const normalizedAlbums = _.keyBy(action.payload.albums, album => album.id);
+    const normalizedAlbums = keyBy(action.payload.albums, album => album.id);
     return {
         ...state,
         list: normalizedAlbums
