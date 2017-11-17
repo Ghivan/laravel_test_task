@@ -18,14 +18,19 @@ class TracksTableSeeder extends Seeder
         Track::truncate();
 
         $faker = \Faker\Factory::create();
+        $albumIds = [];
+        foreach (DB::table('albums')->select('id')->get() as $albumId) {
+            array_push($albumIds, $albumId->id);
+        }
+        array_push($albumIds, null);
+        $albumsIdsLength = count($albumIds);
 
         for ($i = 0; $i < MAX_TRACKS_NUMBER; $i++) {
-            $albumId = DB::table('albums')->inRandomOrder()->first()->id;
             Track::create([
                 'name' => $faker->sentence(MAX_WORDS_IN_TRACK_NAME),
                 'musician' => $faker->name(),
                 'duration' => $faker->time($format = 'i:s'),
-                'album_id' => $albumId
+                'album_id' => $albumIds[rand(0, $albumsIdsLength - 1)]
             ]);
         }
     }
