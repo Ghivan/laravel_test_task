@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@manaflair/redux-batch": "^0.1.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
@@ -12,6 +11,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
+    "redux-batched-actions": "^0.1.6",
     "redux-thunk": "^2.2.0"
   },
   "proxy": "http://192.168.10.10",

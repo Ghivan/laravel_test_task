@@ -63,7 +63,8 @@ class AlbumController extends Controller
     {
         $albumWasDeleted = Album::destroy($id);
         return response()->json([
-            'existed' => boolval($albumWasDeleted)
+            'existed' => boolval($albumWasDeleted),
+            'id' => $albumWasDeleted ? $id : null
         ]);
     }
 }

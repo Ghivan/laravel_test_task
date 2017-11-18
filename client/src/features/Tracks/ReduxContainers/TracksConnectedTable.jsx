@@ -22,7 +22,10 @@ const ActionCreator = {
 const ConnectedTracksTable = connect(mapStateToProps,
     dispatch => bindActionCreators(dispatch, ActionCreator))(TracksTable);
 
-export default () => (
+const ReduxContainerTracksTable = () => (
     <Provider store={store}>
-        <ConnectedTracksTable />
-    </Provider>);
+        <ConnectedTracksTable/>
+    </Provider>
+);
+
+export default ReduxContainerTracksTable;

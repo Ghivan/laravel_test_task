@@ -1,3 +1,8 @@
 export default {
     FETCH: 'TRACKS/ FETCH',
+    UPDATE: 'TRACKS/ UPDATE',
+    MASS_ADD: 'TRACKS/ MASS_ADD',
+    MASS_UPDATE: 'TRACKS/ MASS_UPDATE',
+    ADD: 'TRACKS/ ADD',
+    REMOVE: 'TRACKS/ REMOVE'
 };

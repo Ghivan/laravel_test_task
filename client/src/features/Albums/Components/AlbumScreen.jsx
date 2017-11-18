@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export default ({album, tracks, history}) => {
+const AlbumScreen = ({album, tracks, history}) => {
     if (!album) return null;
     return (
         <div className="container-fluid container-with-padding">
@@ -16,9 +16,13 @@ export default ({album, tracks, history}) => {
             </div>
             <h4 className="card-title">Tracks</h4>
             <ul>
-                {tracks ? tracks.map(track => (
-                    <li key={track.id}>{`${track.name} (${track.duration})`}</li>
-                )) : null}
+                {
+                    tracks.length > 0
+                        ? tracks.map(track => (
+                            <li key={track.id}>{`${track.name} (${track.musician}, ${track.duration})`}</li>
+                        ))
+                        : <p><em>There is no tracks.</em></p>
+                }
             </ul>
             <div className="buttons-block">
                 <Link className="btn btn-outline-primary"
@@ -32,4 +36,6 @@ export default ({album, tracks, history}) => {
             </div>
         </div>
     )
-}
+};
+
+export default AlbumScreen;

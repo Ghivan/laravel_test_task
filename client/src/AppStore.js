@@ -1,6 +1,6 @@
 import {composeWithDevTools} from 'redux-devtools-extension'
 import {createStore, applyMiddleware, combineReducers} from 'redux';
-import {reduxBatch} from '@manaflair/redux-batch';
+import {enableBatching} from 'redux-batched-actions';
 import thunk from 'redux-thunk';
 
 import AlbumService from './api/AlbumService';
@@ -17,8 +17,7 @@ const CombinedReducer = combineReducers({
     }
 );
 
-const store = createStore(CombinedReducer, composeWithDevTools(
-    reduxBatch,
+const store = createStore(enableBatching(CombinedReducer), composeWithDevTools(
     applyMiddleware(
         thunk.withExtraArgument({
             AlbumService,
@@ -26,6 +25,7 @@ const store = createStore(CombinedReducer, composeWithDevTools(
         })
     )));
 
-store.dispatch([TracksActionCreator.fetchTracks(), AlbumsActionCreator.fetchAlbums()]);
+store.dispatch(TracksActionCreator.fetchTracks());
+store.dispatch(AlbumsActionCreator.fetchAlbums());
 
 export default store;

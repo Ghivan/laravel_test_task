@@ -22,8 +22,7 @@ class TrackController extends Controller
         if (
             !$request['name'] ||
             !$request['musician'] ||
-            !$request['duration'] ||
-            !$request['album_id']
+            !$request['duration']
         ) {
             return response()
                 ->json([
@@ -31,11 +30,12 @@ class TrackController extends Controller
                 ], 400);
         }
 
+
+
         $trackExists = Track::where([
                 'name' => $request['name'],
                 'musician' => $request['musician'],
                 'duration' => $request['duration'],
-                'album_id' => $request['album_id']
             ]
         )->get()->isNotEmpty();
 
@@ -50,7 +50,7 @@ class TrackController extends Controller
             'name' => $request['name'],
             'musician' => $request['musician'],
             'duration' => $request['duration'],
-            'album_id' => $request['album_id']
+            'album_id' => ($request['album_id']) ? $request['album_id'] : null
         ]);
     }
 
@@ -66,8 +66,8 @@ class TrackController extends Controller
         if ($request['duration']) {
             $track->duration = $request['duration'];
         }
-        if ($request['album_id']) {
-            $track->musician = $request['album_id'];
+        if ($request['album_id'] ||  $request['album_id'] == null) {
+            $track->album_id = $request['album_id'];
         }
         $track->save();
         return response()->json($track, 200);
@@ -77,7 +77,8 @@ class TrackController extends Controller
     {
         $trackWasDeleted = Track::destroy($id);
         return response()->json([
-            'existed' => boolval($trackWasDeleted)
+            'existed' => boolval($trackWasDeleted),
+            'id' => $trackWasDeleted ? $id : null
         ]);
     }
 }

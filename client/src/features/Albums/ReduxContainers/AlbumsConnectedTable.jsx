@@ -12,7 +12,7 @@ import AlbumsTable from '../Components/AlbumsTable';
 const mapStateToProps = state => {
     return {
         albums: state.albums.list,
-        tracks: groupBy(Object.values(state.tracks.list), (track => track.album_id))
+        tracks: groupBy(state.tracks.list, (track => track.album_id))
     }
 };
 
@@ -23,7 +23,10 @@ const ActionCreator = {
 const ConnectedAlbumsTable = connect(mapStateToProps,
     dispatch => bindActionCreators(dispatch, ActionCreator))(AlbumsTable);
 
-export default () => (
+const ReduxContainerAlbumsTable = () => (
     <Provider store={store}>
-        <ConnectedAlbumsTable />
-    </Provider>);
+        <ConnectedAlbumsTable/>
+    </Provider>
+);
+
+export default ReduxContainerAlbumsTable;

@@ -17,7 +17,8 @@ class CreateTracksTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('name');
-            $table->string('musician');
+            $table->string('musician')
+                ->default('unknown');
             $table->string('duration');
             $table->unsignedInteger('album_id')
                 ->nullable()

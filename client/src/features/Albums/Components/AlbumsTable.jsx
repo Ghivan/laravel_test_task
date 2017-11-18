@@ -2,8 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import isEmpty from 'lodash/isEmpty';
 
-export default ({albums, tracks}) => {
-    if (isEmpty(tracks) || isEmpty(albums)) return <p className="alert text-center"><em>There is no albums!</em></p>;
+const AlbumsTable = ({albums, tracks, removeAlbum}) => {
+    if (isEmpty(albums)) return <p className="alert text-center"><em>There is no albums!</em></p>;
     return (
         <table className='table table-striped'>
             <thead>
@@ -12,26 +12,28 @@ export default ({albums, tracks}) => {
                 <th>Name</th>
                 <th>Release year</th>
                 <th>Tracks</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
-            {Object.keys(albums).map(album_id => {
+            {albums.map(album => {
                 return (
-                    <tr key={album_id}>
+                    <tr key={album.id}>
+                        <td>{album.id}</td>
                         <td>
-                            {album_id}
+                            {album.name} <br />
+                            <Link className="catalog-link" to={`/albums/${album.id}`}>
+                                <em><small>(click for details)</small></em>
+                            </Link>
                         </td>
                         <td>
-                            <Link className="catalog-link" to={`/albums/${album_id}`}>{albums[album_id].name}</Link>
-                        </td>
-                        <td>
-                            {albums[album_id].year}
+                            {album.year}
                         </td>
                         <td>
                             {
-                                tracks[album_id] ?
+                                (tracks !== 'undefined' && tracks[album.id]) ?
                                     <ul className="list-group list-group-item-text">
-                                        {tracks[album_id].map(track => (
+                                        {tracks[album.id].map(track => (
                                                 <li key={track.id}>{track.name}</li>
                                             )
                                         )
@@ -41,10 +43,22 @@ export default ({albums, tracks}) => {
                             }
 
                         </td>
+                        <td>
+                            <button onClick={() => {
+                                removeAlbum(album.id)
+                            }}
+                                    className="btn btn-danger btn-sm"
+                                    title={`Delete album "${album.name}"`}
+                            >
+                                <span className="fa fa-times" aria-hidden="true"/>
+                            </button>
+                        </td>
                     </tr>
                 )
             })}
             </tbody>
         </table>
     )
-}
+};
+
+export default AlbumsTable;
