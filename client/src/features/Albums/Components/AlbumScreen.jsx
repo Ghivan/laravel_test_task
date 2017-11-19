@@ -28,7 +28,7 @@ const AlbumScreen = ({album, tracks, history}) => {
                 >Edit</Link>
                 <button className="btn btn-outline-secondary"
                         onClick={() => {
-                            history.length > 2 ? history.goBack() : history.push('/albums')
+                            history.push('/albums')
                         }}>Back
                 </button>
             </div>

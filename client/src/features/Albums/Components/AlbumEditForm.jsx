@@ -121,14 +121,20 @@ class AlbumEditForm extends React.Component {
 
     removeTrackFromAlbum = id => {
         const newTracksList = this.state.tracks.slice();
+        const errors = clone(this.state.errors);
         const track = this.state.tracks.find(track => track.id === id);
         const trackIndex = this.state.tracks.findIndex(track => track.id === id);
         if (track) {
-            track.status = (track.status === MODE.CREATED) ? MODE.CREATED : MODE.CHANGED;
+            if (track.status === MODE.CREATED) {
+                delete errors[id];
+            } else {
+                track.status = MODE.CHANGED
+            }
             track.album_id = null;
             (track.status === MODE.CREATED) ? newTracksList.splice(trackIndex, 1) : newTracksList.splice(trackIndex, 1, track);
             this.setState({
-                tracks: newTracksList
+                tracks: newTracksList,
+                errors
             })
         }
     };
