@@ -72,7 +72,7 @@ export default {
     addTrack: added => {
         return (dispatch, getState, api) => {
             if (Array.isArray(added)) {
-                Promise.all(added.map(api.TrackService.add))
+                return Promise.all(added.map(api.TrackService.add))
                     .then(tracks => {
                         dispatch(
                             batchActions(
@@ -80,6 +80,9 @@ export default {
                                 ActionTypes.MASS_ADD
                             )
                         );
+                    })
+                    .catch(err => {
+                        console.warn(err)
                     })
             } else {
                 return api.TrackService.add(added)

@@ -4,17 +4,15 @@ import {Link} from 'react-router-dom';
 const AlbumScreen = ({album, tracks, history}) => {
     if (!album) return null;
     return (
-        <div className="container-fluid container-with-padding">
-            <div className="row">
-                <div className="col-sm-2 col-md-5">
-                    <img src="/images/album.jpg" alt="cover"/>
-                </div>
-                <div className="col-sm-10 col-md-7">
-                    <h1>{album.name}</h1>
-                    <p>{album.year}</p>
-                </div>
+        <div>
+            <div className="row p-4">
+                    <img src="/images/album.jpg" alt="cover" className="m-1"/>
+                    <h2>
+                        <em>{album.name}</em><br/>
+                        <small>{album.year}</small>
+                    </h2>
             </div>
-            <h4 className="card-title">Tracks</h4>
+            <p className="card-title"><strong>Tracks:</strong></p>
             <ul>
                 {
                     tracks.length > 0

@@ -12,8 +12,8 @@ import AlbumEditForm from '../Components/AlbumEditForm';
 
 const mapStateToProps = (state, {id}) => {
     id = parseInt(id, 10);
-    const album = id ? state.albums.list.find(album => album.id === id) : null;
-    const tracks = filter(state.tracks.list, (track => track.album_id === id));
+    const album = id ? state.albums.list.find(album => album.id == id) : null;
+    const tracks = filter(state.tracks.list, (track => track.album_id == id));
     return {
         album,
         tracks
